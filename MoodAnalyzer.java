@@ -1,8 +1,9 @@
 package com.bridgelabz.moodanalyzer;
 
-public class MoodAnalyzer {
-    public final String message;
+import com.bridgelabz.moodanalyzer.exception.MoodAnalysisException;
 
+public class MoodAnalyzer {
+    private String message;
 
     public MoodAnalyzer(String message) {
         this.message = message;
@@ -13,18 +14,16 @@ public class MoodAnalyzer {
         return analyseMood();
     }
 
-    public String analyseMood() throws MoodAnalysisException() {
+    public String analyseMood() throws MoodAnalysisException {
         try {
+            if (message.length() == 0)
+                throw new MoodAnalysisException(MoodAnalysisException.exceptionType.ENTERED_EMPTY, "Please enter Proper Mood");
             if (message.contains("Sad"))
                 return "SAD";
             else
                 return "HAPPY";
         } catch (NullPointerException e) {
-            try {
-                throw new MoodAnalysisException("Please enter Proper Mood");
-            } catch (MoodAnalysisException moodAnalysisException) {
-                moodAnalysisException.printStackTrace();
-            }
+            throw new MoodAnalysisException(MoodAnalysisException.exceptionType.ENTERED_NULL, "Please enter Proper Mood");
         }
     }
 }

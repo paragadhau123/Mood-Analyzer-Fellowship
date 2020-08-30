@@ -1,54 +1,72 @@
 package com.bridgelabz.moodanalyzer;
 
+import com.bridgelabz.moodanalyzer.exception.MoodAnalysisException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class MoodAnalyzerTest {
-    private String message;
-
+    /*
+     *This Test Case Excepts
+     * Sad Mood
+     */
     @Test
     public void givenMessgae_WhenSad_ShouldReturn_Sad() {
         com.bridgelabz.moodanalyzer.MoodAnalyzer moodAnalyzer = new com.bridgelabz.moodanalyzer.MoodAnalyzer("I am in Sad Mood");
-        String mood = null;
+        String mood;
         try {
             mood = moodAnalyzer.analyseMood();
-            Assert.assertEquals("SAD",mood);
+            Assert.assertEquals("SAD", mood);
         } catch (MoodAnalysisException e) {
         }
     }
 
+    /*
+     *This Test Case Excepts
+     * Any Other Mood
+     */
     @Test
     public void givenMessage_WhenNotSad_ShouldReturn_Happy() {
         com.bridgelabz.moodanalyzer.MoodAnalyzer moodAnalyzer = new com.bridgelabz.moodanalyzer.MoodAnalyzer("I am in any Mood");
-        String mood = null;
+        String mood;
         try {
             mood = moodAnalyzer.analyseMood();
-            Assert.assertEquals("HAPPY",mood);
+            Assert.assertEquals("HAPPY", mood);
         } catch (MoodAnalysisException e) {
         }
+
     }
 
+    /*
+     *This Test Case Will Check For
+     * Null Pointer Exception
+     */
     @Test
     public void givenNullMood_ShouldReturn_Happy() {
-        String mood = null;
+        com.bridgelabz.moodanalyzer.MoodAnalyzer moodAnalyzer = new com.bridgelabz.moodanalyzer.MoodAnalyzer(null);
+        String mood;
         try {
             ExpectedException exceptionRule = ExpectedException.none();
             exceptionRule.expect(MoodAnalysisException.class);
-            com.bridgelabz.moodanalyzer.MoodAnalyzer moodAnalyzer;
             mood = moodAnalyzer.analyseMood();
-            Assert.assertEquals("HAPPY",mood);
+            Assert.assertEquals("HAPPY", mood);
         } catch (MoodAnalysisException e) {
             e.printStackTrace();
         }
     }
+
+    /*
+     *This Test Case Will Check For
+     * Null Pointer Exception
+     * for empty and null values
+     */
     @Test
     public void givenNullMood_ShouldThrow_Exception() {
         com.bridgelabz.moodanalyzer.MoodAnalyzer moodAnalyzer = new com.bridgelabz.moodanalyzer.MoodAnalyzer(null);
         try {
             moodAnalyzer.analyseMood(null);
         } catch (MoodAnalysisException e) {
-            Assert.assertEquals("Please enter Proper Mood",e.getMessage());
+            Assert.assertEquals(MoodAnalysisException.exceptionType.ENTERED_NULL, e.type);
         }
     }
 }
