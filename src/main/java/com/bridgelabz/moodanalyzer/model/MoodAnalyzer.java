@@ -1,4 +1,4 @@
-package com.bridgelabz.moodanalyzer;
+package com.bridgelabz.moodanalyzer.model;
 
 import com.bridgelabz.moodanalyzer.exception.MoodAnalysisException;
 

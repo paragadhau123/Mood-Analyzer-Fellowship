@@ -1,18 +1,18 @@
-package com.bridgelabz.moodanalyzer;
+package com.bridgelabz.moodanalyzer.model;
 
 import com.bridgelabz.moodanalyzer.exception.MoodAnalysisException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
+import com.bridgelabz.moodanalyzer.model.MoodAnalyzer;
 public class MoodAnalyzerTest {
     /*
      *This Test Case Excepts
      * Sad Mood
      */
     @Test
-    public void givenMessgae_WhenSad_ShouldReturn_Sad() {
-        com.bridgelabz.moodanalyzer.MoodAnalyzer moodAnalyzer = new com.bridgelabz.moodanalyzer.MoodAnalyzer("I am in Sad Mood");
+    public void givenMessgae_WhenSadMoodShouldReturnSad() {
+        MoodAnalyzer moodAnalyzer = new MoodAnalyzer("I am in Sad Mood");
         String mood;
         try {
             mood = moodAnalyzer.analyseMood();
@@ -26,8 +26,8 @@ public class MoodAnalyzerTest {
      * Any Other Mood
      */
     @Test
-    public void givenMessage_WhenNotSad_ShouldReturn_Happy() {
-        com.bridgelabz.moodanalyzer.MoodAnalyzer moodAnalyzer = new com.bridgelabz.moodanalyzer.MoodAnalyzer("I am in any Mood");
+    public void givenMessage_WhenNotInSadMoodShouldReturnHappy() {
+        MoodAnalyzer moodAnalyzer = new MoodAnalyzer("I am in any Mood");
         String mood;
         try {
             mood = moodAnalyzer.analyseMood();
@@ -42,8 +42,8 @@ public class MoodAnalyzerTest {
      * Null Pointer Exception
      */
     @Test
-    public void givenNullMood_ShouldReturn_Happy() {
-        com.bridgelabz.moodanalyzer.MoodAnalyzer moodAnalyzer = new com.bridgelabz.moodanalyzer.MoodAnalyzer(null);
+    public void givenNullMood_ShouldReturnHappy() {
+        MoodAnalyzer moodAnalyzer = new MoodAnalyzer(null);
         String mood;
         try {
             ExpectedException exceptionRule = ExpectedException.none();
@@ -61,8 +61,8 @@ public class MoodAnalyzerTest {
      * for empty and null values
      */
     @Test
-    public void givenNullMood_ShouldThrow_Exception() {
-        com.bridgelabz.moodanalyzer.MoodAnalyzer moodAnalyzer = new com.bridgelabz.moodanalyzer.MoodAnalyzer(null);
+    public void givenNullMood_ShouldThrowException() {
+        MoodAnalyzer moodAnalyzer = new MoodAnalyzer(null);
         try {
             moodAnalyzer.analyseMood(null);
         } catch (MoodAnalysisException e) {
